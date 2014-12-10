@@ -75,7 +75,7 @@ module SnapCI
       def report_number_of_tests(tests, total_workers)
         name = runner.test_file_name
         num_tests = tests.size
-        puts "#{total_workers} workers for #{num_tests} #{name}s, ~ #{(num_tests.to_f/total_workers).ceil} #{name}s per process"
+        $stderr.puts "#{total_workers} workers for #{num_tests} #{name}s, ~ #{(num_tests.to_f/total_workers).ceil} #{name}s per process"
       end
 
       def parse!

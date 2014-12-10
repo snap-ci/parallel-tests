@@ -73,6 +73,7 @@ module SnapCI
       end
 
       def report_number_of_tests(tests, total_workers)
+        return unless runner.report_test_partitioning?
         name = runner.test_file_name
         num_tests = tests.size
         $stderr.puts "#{total_workers} workers for #{num_tests} #{name}s, ~ #{(num_tests.to_f/total_workers).ceil} #{name}s per process"

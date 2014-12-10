@@ -16,6 +16,10 @@ module SnapCI
           exec(cmd)
         end
 
+        def report_test_partitioning?
+          true
+        end
+
         def cli_helper
           CLIHelper
         end

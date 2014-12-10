@@ -22,23 +22,23 @@ Or install it yourself as:
 
 Depending on the framework of your choice -
 
-    $ bundle exec snap_ci-parallel_rspec [options] [files or directories] [-- [rspec options]]
-    $ bundle exec snap_ci-parallel_test [options] [files or directories] [-- [Test::Unit or MiniTest options]]
+    $ bundle exec snap-ci-parallel-rspec [options] [files or directories] [-- [rspec options]]
+    $ bundle exec snap-ci-parallel-test [options] [files or directories] [-- [Test::Unit or MiniTest options]]
 
 
 ## Setup for Rails
 
-Ensure that 'parallel_tests' is present in your development group
+Ensure that 'snap_ci-parallel_tests' is present in your development group
 
 ```ruby
 # Gemfile
-gem "parallel_tests", :group => :development
+gem "snap_ci-parallel_tests", :group => :development
 ```
 
 ### Run
 
-    $ bundle exec snap_ci-parallel_rspec [options] [files or directories] [-- [rspec options]]
-    $ bundle exec snap_ci-parallel_test [options] [files or directories] [-- [Test::Unit or MiniTest options]]
+    $ bundle exec snap-ci-parallel-rspec [options] [files or directories] [-- [rspec options]]
+    $ bundle exec snap-ci-parallel-test [options] [files or directories] [-- [Test::Unit or MiniTest options]]
 
 Alternatively -
 
@@ -53,7 +53,7 @@ $ bundle exec rake -T snap-parallel          # to list all tasks
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/snap_ci-parallel_tests/fork )
+1. Fork it ( https://github.com/[my-github-username]/parallel-tests/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

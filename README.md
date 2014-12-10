@@ -1,4 +1,4 @@
-# SnapCI::ParallelTests
+# SnapCI::ParallelTests [![Build Status](https://snap-ci.com/snap-ci/parallel-tests/branch/master/build_image)](https://snap-ci.com/snap-ci/parallel-tests/branch/master)
 
 Run Test::Unit / RSpec in parallel across multiple workers on [Snap CI](https://snap-ci.com).
 

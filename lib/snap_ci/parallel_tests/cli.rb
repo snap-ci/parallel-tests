@@ -28,7 +28,12 @@ module SnapCI
 
         report_number_of_tests(test_files, SnapCI::ParallelTests.total_workers)
 
-        test_files_to_run = SnapCI::ParallelTests.partition(test_files, SnapCI::ParallelTests.total_workers, SnapCI::ParallelTests.worker_index)
+        test_files_to_run = SnapCI::ParallelTests.partition(
+          things: test_files,
+          total_workers: SnapCI::ParallelTests.total_workers,
+          current_worker_index: SnapCI::ParallelTests.worker_index,
+          group_by: options[:group_by]
+        )
 
         if test_files_to_run.empty?
           $stderr.puts 'No tests to run'
@@ -53,7 +58,7 @@ module SnapCI
           else
             file_or_folder
           end
-        end.flatten.uniq.sort
+        end.flatten.uniq
       end
 
       def files_in_folder(folder, options={})
@@ -75,11 +80,23 @@ module SnapCI
 
       def parse!
         options = {}
+
+        options[:group_by] = :filename
+
         parser = OptionParser.new do |opts|
           runner.cli_helper.render_header(opts)
           opts.separator 'supported options:'
 
           runner.cli_helper.render_options(opts)
+
+          opts.on('-g', '--group-by TYPE', <<-TEXT) do |type|
+group tests by:
+          filename - order of finding files(default)
+          filesize - by size of the file
+            TEXT
+            raise unless %w(name filesize).include?(type)
+            options[:group_by] = type.to_sym
+          end
 
           opts.on('-v', '--version', 'Show Version') do
             puts "SnapCI Parallel Tests v#{SnapCI::ParallelTests::VERSION}"

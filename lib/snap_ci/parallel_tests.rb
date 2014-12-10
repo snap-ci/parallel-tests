@@ -1,16 +1,30 @@
 require 'snap_ci/parallel_tests/version'
+require 'snap_ci/parallel_tests/grouper'
 require 'snap_ci/parallel_tests/railtie' if defined?(Rails::Railtie)
 
 module SnapCI
   module ParallelTests
     WINDOWS = (RbConfig::CONFIG['host_os'] =~ /cygwin|mswin|mingw|bccwin|wince|emx/)
 
-    # index is 1 based, not 0 based
-    def partition(things, total_workers, current_worker_index)
+    # Partitions the a bunch of things to be run on multiple workers, it partitions based on the following options
+    #
+    # ==== Options
+    #   +things+ - the things to partition
+    #   +total_workers+ - the total number of workers, defaults to ParallelTests.total_workers
+    #   +current_worker_index+ - the current worker index (1 based, NOT 0 based), defaults to ParallelTests.worker_index
+    #   +group_by+ - either :filename or :filesize (defaults to :filename). Determines how files are sorted before being partitioned
+    def partition(options={})
+      things = options[:things]
+      total_workers = options[:total_workers] || ParallelTests.total_workers
+      current_worker_index = options[:current_worker_index] || ParallelTests.worker_index
+      group_by = options[:group_by] || :filename
+
       return nil if things.nil? || things.empty?
 
       thing_count = things.count
       specs_per_worker = (thing_count.to_f/total_workers).ceil
+
+      things = Grouper.send("group_by_#{group_by}", things)
 
       things.each_slice(specs_per_worker).to_a[current_worker_index-1]
     end

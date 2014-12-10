@@ -13,7 +13,7 @@ module SnapCI
           test_files = test_files.map { |f| Shellwords.escape(f) }
 
           cmd = [exe, options[:test_opts], (rspec_2_color if version == 2), *test_files].compact.join(' ')
-          options = options.merge(:env => rspec_1_color) #if version == 1
+          options = options.merge(env: rspec_1_color) #if version == 1
 
           $stderr.puts(cmd)
           exec((options[:env] || {}), cmd)

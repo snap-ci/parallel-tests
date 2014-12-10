@@ -47,10 +47,13 @@ if defined?(RSpec) && ENV['SNAP_CI'] && ENV['SNAP_WORKER_TOTAL'] && ENV['SNAP_WO
     types.each do |type, dir|
       desc "Run the code examples in #{dir}"
       all_specs = FileList["./#{dir}/**/*_spec.rb"].sort
-      specs_to_run = SnapCI::ParallelTests.partition(things: all_specs, total_workers: num_workers, current_worker_index: worker_index)
 
       RSpec::Core::RakeTask.new(type => 'snap-parallel:prepare') do |t|
-        t.pattern = specs_to_run
+        specs_to_run = SnapCI::ParallelTests.partition(things: all_specs, total_workers: num_workers, current_worker_index: worker_index)
+
+        if specs_to_run && specs_to_run.count > 0
+          t.pattern = specs_to_run
+        end
       end
     end
   end

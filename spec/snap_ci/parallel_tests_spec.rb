@@ -10,11 +10,11 @@ describe SnapCI::ParallelTests do
     partition2 = partition(things: things, total_workers: 3, current_worker_index: 2)
     partition3 = partition(things: things, total_workers: 3, current_worker_index: 3)
 
-    expect(partition1).to eq([1, 2, 3, 4])
-    expect(partition2).to eq([5, 6, 7, 8])
-    expect(partition3).to eq([9, 10])
+    expect(partition1 + partition2 + partition3).to contain_exactly(*things)
 
-    expect(partition1 + partition2 + partition3).to eq(things)
+    expect(partition1).to eq([1, 4, 7, 10])
+    expect(partition2).to eq([2, 5, 8])
+    expect(partition3).to eq([3, 6, 9])
   end
 
   it 'should create empty partitions if things are empty' do
@@ -24,9 +24,9 @@ describe SnapCI::ParallelTests do
     partition2 = partition(things: things, total_workers: 3, current_worker_index: 2)
     partition3 = partition(things: things, total_workers: 3, current_worker_index: 3)
 
-    expect(partition1).to eq(nil)
-    expect(partition2).to eq(nil)
-    expect(partition3).to eq(nil)
+    expect(partition1).to eq([])
+    expect(partition2).to eq([])
+    expect(partition3).to eq([])
   end
 
   it 'should create empty partitions at end if partitions are more than number of things' do
@@ -38,6 +38,6 @@ describe SnapCI::ParallelTests do
 
     expect(partition1).to eq([1])
     expect(partition2).to eq([2])
-    expect(partition3).to eq(nil)
+    expect(partition3).to eq([])
   end
 end

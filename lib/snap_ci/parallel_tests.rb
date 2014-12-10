@@ -19,14 +19,20 @@ module SnapCI
       current_worker_index = options[:current_worker_index] || ParallelTests.worker_index
       group_by = options[:group_by] || :filename
 
-      return nil if things.nil? || things.empty?
-
-      thing_count = things.count
-      specs_per_worker = (thing_count.to_f/total_workers).ceil
-
+      return [] if things.nil? || things.empty?
       things = Grouper.send("group_by_#{group_by}", things)
 
-      things.each_slice(specs_per_worker).to_a[current_worker_index-1]
+      result = []
+
+      # pick up things on a round-robin basis to distribute them evenly
+      index = current_worker_index - 1
+      while index <= things.count do
+        result << things[index]
+        index += total_workers
+      end
+      result.compact!
+
+      result
     end
 
     def total_workers

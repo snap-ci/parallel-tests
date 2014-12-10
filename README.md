@@ -18,9 +18,38 @@ Or install it yourself as:
 
     $ gem install snap_ci-parallel_tests
 
-## Usage
+## Setup for non-rails
 
-TODO: Write usage instructions here
+Depending on the framework of your choice -
+
+    $ bundle exec snap_ci-parallel_rspec [options] [files or directories] [-- [rspec options]]
+    $ bundle exec snap_ci-parallel_test [options] [files or directories] [-- [Test::Unit or MiniTest options]]
+
+
+## Setup for Rails
+
+Ensure that 'parallel_tests' is present in your development group
+
+```ruby
+# Gemfile
+gem "parallel_tests", :group => :development
+```
+
+### Run
+
+    $ bundle exec snap_ci-parallel_rspec [options] [files or directories] [-- [rspec options]]
+    $ bundle exec snap_ci-parallel_test [options] [files or directories] [-- [Test::Unit or MiniTest options]]
+
+Alternatively -
+
+```shell
+$ bundle exec rake snap-parallel             # to run all specs
+$ bundle exec rake snap-parallel:models      # to run only model specs
+$ bundle exec rake snap-parallel:controllers # to run only controllers specs
+$ bundle exec rake -T snap-parallel          # to list all tasks
+```
+
+
 
 ## Contributing
 

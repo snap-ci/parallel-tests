@@ -28,24 +28,6 @@ module SnapCI
           'test'
         end
 
-        private
-
-        def output_of(cmd)
-          `#{cmd}`
-        end
-
-        def rspec_2_color
-          '--color --tty' if $stdout.tty?
-        end
-
-        def rspec_1_color
-          if $stdout.tty?
-            { 'RSPEC_COLOR' => '1' }
-          else
-            {}
-          end
-        end
-
       end #Runner
 
     end #RSpec

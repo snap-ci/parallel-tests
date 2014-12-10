@@ -84,10 +84,10 @@ module SnapCI
         options[:group_by] = :filename
 
         parser = OptionParser.new do |opts|
-          runner.cli_helper.render_header(opts)
+          runner.cli_helper.render_header(opts, options)
           opts.separator 'supported options:'
 
-          runner.cli_helper.render_options(opts)
+          runner.cli_helper.render_options(opts, options)
 
           opts.on('-g', '--group-by TYPE', <<-TEXT) do |type|
 group tests by:
@@ -112,7 +112,7 @@ group tests by:
             exit
           end
 
-          runner.cli_helper.render_footer(opts)
+          runner.cli_helper.render_footer(opts, options)
         end
 
         parser.parse!(argv)

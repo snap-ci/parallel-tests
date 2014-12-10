@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+$LOAD_PATH << File.expand_path("../../lib", __FILE__)
+require 'snap_ci/parallel_tests'
+require 'snap_ci/parallel_tests/cli'
+require 'snap_ci/parallel_tests/rspec/runner'
+
+SnapCI::ParallelTests::CLI.new(SnapCI::ParallelTests::RSpec::Runner.new, ARGV).run

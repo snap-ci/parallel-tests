@@ -34,6 +34,6 @@ module SnapCI
 
       end #Runner
 
-    end #RSpec
+    end #Test
   end #ParallelTests
 end #SnapCI

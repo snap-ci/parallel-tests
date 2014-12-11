@@ -23,6 +23,6 @@ BANNER
         extend CLIHelper
       end #CLIHelper
 
-    end #RSpec
+    end #Test
   end #ParallelTests
 end #SnapCI

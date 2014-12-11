@@ -95,8 +95,23 @@ group tests by:
           filename - order of finding files(default)
           filesize - by size of the file
             TEXT
-            raise unless %w(name filesize).include?(type)
+
+            allowed_group_values = %w(filename filesize)
+            raise "Group option only supports #{allowed_group_values.join(', ')}. You passed #{type}" unless allowed_group_values.include?(type)
+
             options[:group_by] = type.to_sym
+          end
+
+          opts.on('-d', '--distribution TYPE', <<-TEXT) do |type|
+after grouping tests, distribute tests across workers by:
+          roundrobin - distribute files one at a time to each worker (default)
+          chunk      - slice tests
+            TEXT
+
+            allowed_distribution_values = %w(roundrobin chunk)
+            raise "Distribution option only supports #{allowed_distribution_values.join(', ')}. You passed #{type}" unless allowed_distribution_values.include?(type)
+
+            options[:distribution] = type.to_sym
           end
 
           opts.on('-v', '--version', 'Show Version') do

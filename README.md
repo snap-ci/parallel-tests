@@ -1,8 +1,16 @@
 # SnapCI::ParallelTests [![Build Status](https://snap-ci.com/snap-ci/parallel-tests/branch/master/build_image)](https://snap-ci.com/snap-ci/parallel-tests/branch/master)
 
-Run Test::Unit / RSpec in parallel across multiple workers on [Snap CI](https://snap-ci.com).
+Run tests in parallel across multiple workers on [Snap CI](https://snap-ci.com).
 
 ## Installation
+
+**Note:** This gem is already installed on Snap CI - you need not do anything to install it, just start using it.
+
+### To install this gem on your local machine
+
+>    $ gem install snap_ci-parallel_tests
+
+Or alternatively:
 
 Add this line to your application's Gemfile:
 
@@ -14,17 +22,13 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install snap_ci-parallel_tests
-
 ## Setup for non-rails
 
 Depending on the framework of your choice -
 
-    $ bundle exec snap-ci-parallel-rspec [options] [files or directories] [-- [rspec options]]
-    $ bundle exec snap-ci-parallel-test [options] [files or directories] [-- [Test::Unit or MiniTest options]]
-
+    $ [bundle exec] snap-ci-parallel-rspec [options] [files or directories] [-- [rspec options]]
+    $ [bundle exec] snap-ci-parallel-test [options] [files or directories] [-- [Test::Unit or MiniTest options]]
+    $ ./your-test-suite $([bundle exec] snap-ci-parallel-partition [options] [files or directories])
 
 ## Setup for Rails
 

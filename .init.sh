@@ -10,14 +10,14 @@ then
 fi
 
 mkdir -p $BUNDLE_PATH
-rm -rf vendor/bundle
-ln -sf $BUNDLE_PATH vendor/bundle
+rm -rf bundle
+ln -sf $BUNDLE_PATH bundle
 
 export NOKOGIRI_USE_SYSTEM_LIBRARIES=1
 
 while read line; do
   [[ -n ${SNAP_CI} || -n ${GO_SERVER_URL} ]] || echo -ne "Doing $((C++)) things...\r"
-done < <(bundle check || bundle install --local --path vendor/bundle --clean)
+done < <(bundle check || bundle install --path vendor/bundle --clean)
 
 echo
 echo "Done!"

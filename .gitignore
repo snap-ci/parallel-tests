@@ -11,4 +11,4 @@
 *.o
 *.a
 mkmf.log
-vendor/bundle
+bundle

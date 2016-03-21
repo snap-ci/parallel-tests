@@ -6,8 +6,8 @@ require 'snap_ci/parallel_tests/version'
 Gem::Specification.new do |spec|
   spec.name          = "snap_ci-parallel_tests"
   spec.version       = SnapCI::ParallelTests::VERSION
-  spec.authors       = ["Ketan Padegaonkar"]
-  spec.email         = ["KetanPadegaonkar@gmail.com"]
+  spec.authors       = ["Snap CI"]
+  spec.email         = ["support@snap-ci.com"]
   spec.summary       = %q{Run Test::Unit / RSpec in parallel across multiple workers on Snap CI}
   spec.description   = %q{Run Test::Unit / RSpec in parallel across multiple workers on Snap CI}
   spec.homepage      = "https://github.com/snap-ci/parallel-tests"

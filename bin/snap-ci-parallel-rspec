@@ -1,7 +1,11 @@
-#!/usr/bin/env ruby
-$LOAD_PATH << File.expand_path("../../lib", __FILE__)
-require 'snap_ci/parallel_tests'
-require 'snap_ci/parallel_tests/cli'
-require 'snap_ci/parallel_tests/rspec/runner'
+#!/bin/bash
+set -e
 
-SnapCI::ParallelTests::CLI.new(SnapCI::ParallelTests::RSpec::Runner.new, ARGV).run
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# More info about this: https://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
+
+if [ "$( ruby --version )" != "$( cat $CURRENT_DIR/../.ruby-version )" ]; then
+  exec env RBENV_VERSION="$( cat $CURRENT_DIR/../.ruby-version )" $CURRENT_DIR/snap-ci-parallel-rspec-assuming-ruby-version-set "$@"
+else
+  exec $CURRENT_DIR/snap-ci-parallel-rspec-assuming-ruby-version-set "$@"
+fi

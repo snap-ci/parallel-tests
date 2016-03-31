@@ -22,6 +22,8 @@ And then execute:
 
     $ bundle
 
+> Ruby version support: We will supporting this gem only with ruby 2.2.4. If there is reason you would like to use this gem with some other version of ruby, please get in touch with us by writing to support@snap-ci.com
+
 ## Setup for non-rails
 
 Depending on the framework of your choice -
